@@ -108,7 +108,7 @@ const CoinCard = ({ item }) => {
 
       {/* Chart */}
       <View style={styles.chartContainer}>
-        {loading ? (
+        {/* {loading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
         ) : (
           <Chart
@@ -130,7 +130,7 @@ const CoinCard = ({ item }) => {
               }}
             />
           </Chart>
-        )}
+        )} */}
       </View>
     </LinearGradient>
   );

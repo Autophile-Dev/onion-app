@@ -36,39 +36,39 @@ export default function HomeScreen() {
 
   const [topLosersCoins, setTopLosersCoins] = useState<CoinType[]>([]);
   const [topLosersLoading, setTopLosersLoading] = useState(true);
-  // const fetchCoinData = async () => {
-  //   setFirstCoinLoading(true);
-  //   try {
-  //     const res = await CoinAPI.first_coin();
-  //     const typedRes = res as CoinAPIResponse;
-  //     if (typedRes?.data?.Data?.length) {
-  //       setFirstCoin({ ...typedRes.data.Data[0] }); // Cloning the object
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching first coin:", error);
-  //   }
-  //   setFirstCoinLoading(false);
-  // };
+  const fetchCoinData = async () => {
+    setFirstCoinLoading(true);
+    try {
+      const res = await CoinAPI.first_coin();
+      const typedRes = res as CoinAPIResponse;
+      if (typedRes?.data?.Data?.length) {
+        setFirstCoin({ ...typedRes.data.Data[0] }); // Cloning the object
+      }
+    } catch (error) {
+      console.error("Error fetching first coin:", error);
+    }
+    setFirstCoinLoading(false);
+  };
 
-  // const fetchTop5CoinsData = async () => {
-  //   setTop5CoinsLoading(true);
-  //   try {
-  //     const res = await CoinAPI.fetchTop5Coins();
-  //     const typedRes = res as CoinAPIResponse;
-  //     if (typedRes?.data?.Data) {
-  //       setTop5Coins([...typedRes.data.Data.slice(1)]); // Cloning the array
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching top coins:", error);
-  //   }
-  //   setTop5CoinsLoading(false);
-  // };
+  const fetchTop5CoinsData = async () => {
+    setTop5CoinsLoading(true);
+    try {
+      const res = await CoinAPI.fetchTop5Coins();
+      const typedRes = res as CoinAPIResponse;
+      if (typedRes?.data?.Data) {
+        setTop5Coins([...typedRes.data.Data.slice(1)]); // Cloning the array
+      }
+    } catch (error) {
+      console.error("Error fetching top coins:", error);
+    }
+    setTop5CoinsLoading(false);
+  };
   
  
 
   useEffect(() => {
-    // fetchCoinData();
-    // fetchTop5CoinsData();
+    fetchCoinData();
+    fetchTop5CoinsData();
     // fetchTopGainerLoserCoins();
   }, []);
   return (
@@ -151,18 +151,18 @@ export default function HomeScreen() {
           </View>
           <Link href="/coin" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
         </View>
-        {/* {firstCoinLoading ? (
+        {firstCoinLoading ? (
             <Text  style={{ color: '#FF9900' }}>Loading...</Text>
           ) : firstCoin ? (
             <CoinCard item={firstCoin} />
           ) : (
             <Text style={{ color: '#FF0000FF' }}>No Data Available</Text>
-          )} */}
+          )}
       </View>
       {/* top coins */}
       
       <View style={styles.top5CoinsContainer}>
-        {/* {top5CoinsLoading ? (
+        {top5CoinsLoading ? (
             <Text  style={{ color: '#FF9900' }}>Loading...</Text>
           ) : top5Coins.length > 0 ? (
             <FlatList
@@ -175,7 +175,7 @@ export default function HomeScreen() {
             />
           ) : (
             <Text style={{ color: '#FF0000FF' }}>No Data Available</Text>
-          )} */}
+          )}
       </View>
 
       {/* Top Gainers */}

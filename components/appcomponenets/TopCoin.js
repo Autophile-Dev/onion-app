@@ -56,7 +56,7 @@ const TopCoin = ({ item }) => {
       style={styles.container}
     >
       <View style={styles.chart}>
-        {loading ? (
+        {/* {loading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
         ) : (
           <Chart
@@ -81,7 +81,7 @@ const TopCoin = ({ item }) => {
               }}
             />
           </Chart>
-        )}
+        )} */}
       </View>
 
       <View style={styles.cardHeadContainer}>
