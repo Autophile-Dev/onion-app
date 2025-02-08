@@ -22,9 +22,17 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "06cfeca0-080b-416e-99e3-19ab0df28cf7"
+      }
+    },
+    "owner": "hexa_waleed"
   }
 }
