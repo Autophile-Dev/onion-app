@@ -22,15 +22,11 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
- 
-  let isLoggedIn = true;
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 
-        {isLoggedIn ? (
+        
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)"  />
             <Stack.Screen name="profile"  />
@@ -38,10 +34,7 @@ export default function RootLayout() {
             <Stack.Screen name="login"  />
             <Stack.Screen name="registration"  />
           </Stack>
-        ) : (
-          <Redirect href='/login' />
-        )}
-        {/* Replace default Stack.Navigator with your custom navigator */}
+        
         
     
       <StatusBar style="auto" />

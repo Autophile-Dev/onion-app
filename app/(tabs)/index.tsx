@@ -36,79 +36,43 @@ export default function HomeScreen() {
 
   const [topLosersCoins, setTopLosersCoins] = useState<CoinType[]>([]);
   const [topLosersLoading, setTopLosersLoading] = useState(true);
-  const fetchCoinData = async () => {
-    setFirstCoinLoading(true);
-    try {
-      const res = await CoinAPI.first_coin();
-      const typedRes = res as CoinAPIResponse;
-      if (typedRes?.data?.Data?.length) {
-        setFirstCoin({ ...typedRes.data.Data[0] }); // Cloning the object
-      }
-    } catch (error) {
-      console.error("Error fetching first coin:", error);
-    }
-    setFirstCoinLoading(false);
-  };
-
-  const fetchTop5CoinsData = async () => {
-    setTop5CoinsLoading(true);
-    try {
-      const res = await CoinAPI.fetchTop5Coins();
-      const typedRes = res as CoinAPIResponse;
-      if (typedRes?.data?.Data) {
-        setTop5Coins([...typedRes.data.Data.slice(1)]); // Cloning the array
-      }
-    } catch (error) {
-      console.error("Error fetching top coins:", error);
-    }
-    setTop5CoinsLoading(false);
-  };
-  
-  // const fetchTopGainerLoserCoins = async () => {
-  //   setTopGainerLoading(true);
-  // setTopLosersLoading(true);
+  // const fetchCoinData = async () => {
+  //   setFirstCoinLoading(true);
   //   try {
-  //     const res = await CoinAPI.top_10_coins();
-  //     const typedRes = res as CoinAPIResponse; // Explicitly casting response type
-  
-  //     if (!typedRes?.data?.Data) {
-  //       throw new Error("Invalid data structure received");
+  //     const res = await CoinAPI.first_coin();
+  //     const typedRes = res as CoinAPIResponse;
+  //     if (typedRes?.data?.Data?.length) {
+  //       setFirstCoin({ ...typedRes.data.Data[0] }); // Cloning the object
   //     }
-  
-  //     const allCoins: CoinType[] = typedRes.data.Data;
-  
-  //     const gainers = allCoins.filter((coin: CoinType) => coin.RAW.USD.CHANGEPCT24HOUR > 0);
-  //     const losers = allCoins.filter((coin: CoinType) => coin.RAW.USD.CHANGEPCT24HOUR <= 0);
-  
-  //     gainers.sort((a: CoinType, b: CoinType) => b.RAW.USD.CHANGEPCT24HOUR - a.RAW.USD.CHANGEPCT24HOUR);
-  //     losers.sort((a: CoinType, b: CoinType) => a.RAW.USD.CHANGEPCT24HOUR - b.RAW.USD.CHANGEPCT24HOUR);
-  
-  //     setTopGainersCoins(gainers);
-  //     setTopLosersCoins(losers);
   //   } catch (error) {
-  //     console.error("Error fetching top gainer and loser coins:", error);
+  //     console.error("Error fetching first coin:", error);
   //   }
-  //   setTopGainerLoading(false);
-  //   setTopLosersLoading(false);
+  //   setFirstCoinLoading(false);
   // };
 
-  const onRefresh = useCallback(() => {
-    setRefresh(true);
-    fetchCoinData();
-    fetchTop5CoinsData();
-    // fetchTopGainerLoserCoins();
-    // news_fetch();
-    setTimeout(() => {
-      setRefresh(false);
-    }, 5000);
-  },[refresh]);
+  // const fetchTop5CoinsData = async () => {
+  //   setTop5CoinsLoading(true);
+  //   try {
+  //     const res = await CoinAPI.fetchTop5Coins();
+  //     const typedRes = res as CoinAPIResponse;
+  //     if (typedRes?.data?.Data) {
+  //       setTop5Coins([...typedRes.data.Data.slice(1)]); // Cloning the array
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching top coins:", error);
+  //   }
+  //   setTop5CoinsLoading(false);
+  // };
+  
+ 
+
   useEffect(() => {
-    fetchCoinData();
-    fetchTop5CoinsData();
+    // fetchCoinData();
+    // fetchTop5CoinsData();
     // fetchTopGainerLoserCoins();
   }, []);
   return (
-    <SafeAreaView style={styles.Container}>
+    <View style={styles.Container}>
     <TopBar />
     <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
       <Greetings/>
@@ -187,18 +151,18 @@ export default function HomeScreen() {
           </View>
           <Link href="/coin" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
         </View>
-        {firstCoinLoading ? (
+        {/* {firstCoinLoading ? (
             <Text  style={{ color: '#FF9900' }}>Loading...</Text>
           ) : firstCoin ? (
             <CoinCard item={firstCoin} />
           ) : (
             <Text style={{ color: '#FF0000FF' }}>No Data Available</Text>
-          )}
+          )} */}
       </View>
       {/* top coins */}
       
       <View style={styles.top5CoinsContainer}>
-        {top5CoinsLoading ? (
+        {/* {top5CoinsLoading ? (
             <Text  style={{ color: '#FF9900' }}>Loading...</Text>
           ) : top5Coins.length > 0 ? (
             <FlatList
@@ -211,7 +175,7 @@ export default function HomeScreen() {
             />
           ) : (
             <Text style={{ color: '#FF0000FF' }}>No Data Available</Text>
-          )}
+          )} */}
       </View>
 
       {/* Top Gainers */}
@@ -251,7 +215,7 @@ export default function HomeScreen() {
         </View>
       </View>
     </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -268,7 +232,8 @@ const styles = StyleSheet.create({
   },
   Container: {
     flex:1,
-    backgroundColor:'#1c4d4d'
+    backgroundColor:'#1c4d4d',
+    paddingTop:40
   },
   contentContainer:{
     paddingBottom:130,
