@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-         "backgroundColor": "#1c4d4d"
+        "backgroundColor": "#1c4d4d"
       }
     },
     "web": {
@@ -34,12 +34,21 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#1c4d4d"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "06cfeca0-080b-416e-99e3-19ab0df28cf7"
+      }
+    },
+    "owner": "hexa_waleed"
   }
 }
