@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#1c4d4d"
-      }
+      },
+      "package": "com.hexa_waleed.onionapp"
     },
     "web": {
       "bundler": "metro",
