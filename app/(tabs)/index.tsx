@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, Text, View, ScrollView, TouchableOpacity, Dimensions, FlatList, RefreshControl } from 'react-native';
+import { Image, StyleSheet, Platform, Text, View, ScrollView, TouchableOpacity, Dimensions, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopBar from "../../components/appcomponenets/TopBar"
 import Greetings from "../../components/appcomponenets/Greetings";
@@ -6,6 +6,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'expo-router';
 import CoinCard from "../../components/appcomponenets/CoinCard";
 import TopCoin from "../../components/appcomponenets/TopCoin";
+import TopGainers from "../../components/appcomponenets/TopGainers";
+import TopLosers from "../../components/appcomponenets/TopLosers";
+import TopNews from "../../components/appcomponenets/TopNews";
 import CoinAPI from "@/services/coin_API";
 
 type CoinAPIResponse = {
@@ -24,6 +27,7 @@ type CoinType = {
   };
 };
 export default function HomeScreen() {
+  const [reload, setReload] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [firstCoin, setFirstCoin] = useState<CoinType | null>(null);
@@ -31,11 +35,6 @@ export default function HomeScreen() {
   const [top5Coins, setTop5Coins] = useState<CoinType[]>([]);
   const [top5CoinsLoading, setTop5CoinsLoading] = useState(true);
 
-  const [topGainersCoins, setTopGainersCoins] = useState<CoinType[]>([]);
-  const [topGainerLoading, setTopGainerLoading] = useState(true);
-
-  const [topLosersCoins, setTopLosersCoins] = useState<CoinType[]>([]);
-  const [topLosersLoading, setTopLosersLoading] = useState(true);
   const fetchCoinData = async () => {
     setFirstCoinLoading(true);
     try {
@@ -49,7 +48,6 @@ export default function HomeScreen() {
     }
     setFirstCoinLoading(false);
   };
-
   const fetchTop5CoinsData = async () => {
     setTop5CoinsLoading(true);
     try {
@@ -63,9 +61,14 @@ export default function HomeScreen() {
     }
     setTop5CoinsLoading(false);
   };
-  
- 
-
+  const onRefresh = async () => {
+    setRefresh(true);
+    setReload(true)
+    await fetchCoinData();
+    await fetchTop5CoinsData();
+    setRefresh(false);
+    setReload(false)
+  };
   useEffect(() => {
     fetchCoinData();
     fetchTop5CoinsData();
@@ -74,7 +77,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.Container}>
     <TopBar />
-    <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false} refreshControl={
+    <RefreshControl refreshing={refresh} onRefresh={onRefresh} colors={["#FF9900"]} />
+  }>
       <Greetings/>
       {/* Link Cards */}
       <View style={styles.topCardContainer}>
@@ -152,7 +157,7 @@ export default function HomeScreen() {
           <Link href="/coin" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
         </View>
         {firstCoinLoading ? (
-            <Text  style={{ color: '#FF9900' }}>Loading...</Text>
+            <ActivityIndicator size="large" color="#FF9900"/>
           ) : firstCoin ? (
             <CoinCard item={firstCoin} />
           ) : (
@@ -163,7 +168,7 @@ export default function HomeScreen() {
       
       <View style={styles.top5CoinsContainer}>
         {top5CoinsLoading ? (
-            <Text  style={{ color: '#FF9900' }}>Loading...</Text>
+            <ActivityIndicator size="large" color="#FF9900"/>
           ) : top5Coins.length > 0 ? (
             <FlatList
               horizontal
@@ -187,21 +192,7 @@ export default function HomeScreen() {
             <Link href="/coin" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
         </View>
         <View style={{paddingLeft:20}}>
-
-          {/* {topGainerLoading ? (
-              <Text style={{ color: '#FF9900' }}>Loading...</Text>
-              ) : topGainersCoins.length > 0 ? (
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ columnGap: 12 }}
-                keyExtractor={(item) => item.CoinInfo.id}
-                data={topGainersCoins}
-                renderItem={({ item }) => <TopCoin item={item} />}
-              />
-            ) : (
-              <Text style={{ color: '#FF0000FF' }}>No Data Available</Text>
-          )} */}
+          <TopGainers refreshing={reload}/>
         </View>
       </View>
 
@@ -212,6 +203,22 @@ export default function HomeScreen() {
               <Text style={styles.TitleText}>Top Losers</Text>
             </View>
             <Link href="/coin" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
+        </View>
+        <View style={{paddingLeft:20}}>
+          <TopLosers refreshing={reload} />
+        </View>
+      </View>
+
+      {/* Top Losers */}
+      <View style={styles.TopGainerContainer}>
+        <View style={styles.NewcontentTitlesContainer}>
+            <View>
+              <Text style={styles.TitleText}>Latest News</Text>
+            </View>
+            <Link href="/explore" style={{color: '#FF9900', fontSize: 14}}>See All</Link>
+        </View>
+        <View style={{paddingLeft:20}}>
+          <TopNews refreshing={reload} />
         </View>
       </View>
     </ScrollView>

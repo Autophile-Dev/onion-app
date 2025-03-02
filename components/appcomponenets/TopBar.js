@@ -31,7 +31,8 @@ const TopBar = () => {
 const styles = StyleSheet.create({
   TopBarContainer: {
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    paddingRight: 20,
+    paddingLeft: 15,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
