@@ -6,6 +6,8 @@ import { Chart, Line, VerticalAxis } from "react-native-responsive-linechart";
 const CoinCard = ({ item }) => {
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [chartError, setChartError] = useState(false);
+
   if (!item || !item.CoinInfo || !item.RAW || !item.RAW.USD) {
     return null;
   }
@@ -35,20 +37,24 @@ const CoinCard = ({ item }) => {
     const fetchChartData = async () => {
       if (!internal) return;
       setLoading(true);
+      setChartError(false);
       try {
         const response = await axios.get(
           `https://min-api.cryptocompare.com/data/v2/histohour?fsym=${internal}&tsym=USD&limit=24`
-          // `https://min-api.cryptocompare.com/data/v2/histominute?fsym=${internal}&tsym=USD&limit=60`
         );
         const data = response.data.Data.Data;
+        if (!data || data.length === 0) {
+          setChartError(true);
+          return;
+        }
         const formattedData = data.map((point, index) => ({
           x: index,
-          y: point.close, // Use closing price for the chart
+          y: point.close || 0,
         }));
         setChartData(formattedData);
-        console.log("ChartDAta", chartData);
       } catch (error) {
         console.error("Error fetching chart data:", error);
+        setChartError(true);
       } finally {
         setLoading(false);
       }
@@ -108,29 +114,33 @@ const CoinCard = ({ item }) => {
 
       {/* Chart */}
       <View style={styles.chartContainer}>
-        {/* {loading ? (
+        {loading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
-        ) : (
-          <Chart
-            style={{ height: 100, width: 180 }}
-            data={chartData}
-            padding={{ left: 10, bottom: 20, right: 0, top: 10 }}
-          >
-            <VerticalAxis
-              includeOriginTick={false}
-              tickValues={false}
-              theme={{ axis: { visible: false }, labels: { visible: false } }}
-            />
-            <Line
-              theme={{
-                stroke: {
-                  color: priceChangePercentage7d > 0 ? "#56FF86FF" : "#FF4D4D",
-                  width: 3,
-                },
-              }}
-            />
-          </Chart>
-        )} */}
+        ) : chartError ? (
+          <Text style={{ color: '#ffffff', fontSize: 12 }}>Chart unavailable</Text>
+        ) : chartData.length > 0 ? (
+          <View style={{ height: 100, width: 180 }}>
+            <Chart
+              style={{ height: 100, width: 180 }}
+              data={chartData}
+              padding={{ left: 10, bottom: 20, right: 0, top: 10 }}
+            >
+              <VerticalAxis
+                includeOriginTick={false}
+                tickValues={[]}
+                theme={{ axis: { visible: false }, labels: { visible: false } }}
+              />
+              <Line
+                theme={{
+                  stroke: {
+                    color: priceChangePercentage7d > 0 ? "#56FF86FF" : "#FF4D4D",
+                    width: 3,
+                  },
+                }}
+              />
+            </Chart>
+          </View>
+        ) : null}
       </View>
     </LinearGradient>
   );
