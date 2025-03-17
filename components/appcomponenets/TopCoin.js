@@ -62,7 +62,7 @@ const TopCoin = ({ item }) => {
       }
       style={styles.container}
     >
-      <View style={styles.chartContainer}>
+      {/* <View style={styles.chartContainer}>
         {loading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
         ) : chartError ? (
@@ -90,7 +90,7 @@ const TopCoin = ({ item }) => {
             </Chart>
           </View>
         ) : null}
-      </View>
+      </View> */}
 
       <View style={styles.cardHeadContainer}>
         <View style={styles.headContentTop}>
