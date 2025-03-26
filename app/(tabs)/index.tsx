@@ -41,8 +41,9 @@ export default function HomeScreen() {
       const res = await CoinAPI.first_coin();
       const typedRes = res as CoinAPIResponse;
       if (typedRes?.data?.Data?.length) {
-        setFirstCoin({ ...typedRes.data.Data[0] }); // Cloning the object
+        setFirstCoin({ ...typedRes?.data?.Data[0] }); // Cloning the object
       }
+      console.log(firstCoin)
     } catch (error) {
       console.error("Error fetching first coin:", error);
     }

@@ -83,7 +83,7 @@ const ExploreScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.ExploreText}>Explore</Text>
 
         {/* Carousel News */}
@@ -321,10 +321,19 @@ const ExploreScreen = () => {
           <>
             <View style={styles.marketUpdatesContainer}>
               <View style={styles.innerContainerUpdateMarket}>
-                <Text style={{color:'#FF9900', fontSize:12, textAlign:'center'}}>
+                <Text
+                  style={{
+                    color: "#FF9900",
+                    fontSize: 12,
+                    textAlign: "center",
+                  }}
+                >
                   Upgrade your plan to access latest Market Updates.
                 </Text>
-                <Image style={styles.lockStyle} source={require("../../assets/images/iconsapp/lock.png")}/>
+                <Image
+                  style={styles.lockStyle}
+                  source={require("../../assets/images/iconsapp/lock.png")}
+                />
                 <TouchableOpacity style={styles.upgradeButton}>
                   <Text style={styles.buttonText}>Upgrade Plan</Text>
                 </TouchableOpacity>
@@ -395,7 +404,7 @@ const styles = StyleSheet.create({
     // marginRight: 60,
     marginHorizontal: 20,
     marginBottom: 20,
-    paddingBottom:80,
+    paddingBottom: 80,
   },
   innerTabContainer: {
     backgroundColor: "#FFFFFF",
@@ -422,8 +431,8 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
     height: "460",
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   innerContainerUpdateMarket: {
     display: "flex",
@@ -431,24 +440,24 @@ const styles = StyleSheet.create({
     // marginTop: 30,
     flexDirection: "column",
     width: "140",
-    gap:14,
+    gap: 14,
     // width: 30,
-    alignItems:'center',
+    alignItems: "center",
     height: "auto",
   },
-  lockStyle:{
-    width:43,
-    height:50,
+  lockStyle: {
+    width: 43,
+    height: 50,
   },
-  upgradeButton:{
-    backgroundColor:'#FF9900',
-    paddingHorizontal:14,
-    paddingVertical:6,
-    borderRadius:7,
+  upgradeButton: {
+    backgroundColor: "#FF9900",
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 7,
   },
-  buttonText:{
-    color:'#ffffff',
-    fontSize:16,
-    fontWeight:'medium'
-  }
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "medium",
+  },
 });

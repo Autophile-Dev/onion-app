@@ -4,21 +4,21 @@ import { useNavigation } from "@react-navigation/native";
 const backTop = () => {
   const navigation = useNavigation(); // Access the navigation object
 
-  const handleProfileClick = () => {
-    navigation.navigate("profile"); // Navigate to the "profile" screen
+  const handleBackClick = () => {
+    navigation.goBack(); // Navigate to the "profile" screen
   };
-  const handleNotificationClick = () => {
-    navigation.navigate("notification"); // Navigate to the "profile" screen
-  };
+  // const handleNotificationClick = () => {
+  //   navigation.navigate("notification"); // Navigate to the "profile" screen
+  // };
   return (
     <View style={styles.TopBarContainer}>
-      <TouchableOpacity onPress={handleProfileClick}>
+      <TouchableOpacity onPress={handleBackClick}>
         <Image
           style={styles.ImageSize}
           source={require("../../assets/images/iconsapp/back.png")}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleNotificationClick}>
+      <TouchableOpacity>
         <Image
           style={styles.ImageSizeNotif}
           source={require("../../assets/images/iconsapp/faq.png")}

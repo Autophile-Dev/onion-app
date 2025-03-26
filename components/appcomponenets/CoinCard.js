@@ -77,7 +77,7 @@ const CoinCard = ({ item }) => {
           <View style={styles.coinImage}>
             <Image
               source={{
-                uri: "https://www.cryptocompare.com" + item.CoinInfo.ImageUrl,
+                uri: "https://www.cryptocompare.com" + item?.CoinInfo?.ImageUrl,
               }}
               style={styles.image}
             />
