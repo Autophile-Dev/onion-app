@@ -8,10 +8,11 @@ const CoinCard = ({ item }) => {
   const [loading, setLoading] = useState(true);
   const [chartError, setChartError] = useState(false);
 
-  if (!item || !item.CoinInfo || !item.RAW || !item.RAW.USD) {
+  if (!item || !item?.CoinInfo || !item?.RAW || !item?.RAW?.USD) {
     return null;
   }
   const fullName = item?.CoinInfo?.FullName ?? "Unknown Coin";
+  console.log(fullName)
   const internal = item?.CoinInfo?.Internal ?? "N/A";
   const price = item?.RAW?.USD?.PRICE?.toFixed(2) ?? "0.00";
   // const priceChangePercentage7d = 1;
@@ -33,35 +34,35 @@ const CoinCard = ({ item }) => {
   //   {value:14},
   // ]
 
-  useEffect(() => {
-    const fetchChartData = async () => {
-      if (!internal) return;
-      setLoading(true);
-      setChartError(false);
-      try {
-        const response = await axios.get(
-          `https://min-api.cryptocompare.com/data/v2/histohour?fsym=${internal}&tsym=USD&limit=24`
-        );
-        const data = response.data.Data.Data;
-        if (!data || data.length === 0) {
-          setChartError(true);
-          return;
-        }
-        const formattedData = data.map((point, index) => ({
-          x: index,
-          y: point.close || 0,
-        }));
-        setChartData(formattedData);
-      } catch (error) {
-        console.error("Error fetching chart data:", error);
-        setChartError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchChartData = async () => {
+  //     if (!internal) return;
+  //     setLoading(true);
+  //     setChartError(false);
+  //     try {
+  //       const response = await axios.get(
+  //         `https://min-api.cryptocompare.com/data/v2/histohour?fsym=${internal}&tsym=USD&limit=24`
+  //       );
+  //       const data = response.data.Data.Data;
+  //       if (!data || data.length === 0) {
+  //         setChartError(true);
+  //         return;
+  //       }
+  //       const formattedData = data.map((point, index) => ({
+  //         x: index,
+  //         y: point.close || 0,
+  //       }));
+  //       setChartData(formattedData);
+  //     } catch (error) {
+  //       console.error("Error fetching chart data:", error);
+  //       setChartError(true);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchChartData();
-  }, [internal]);
+  //   fetchChartData();
+  // }, [internal]);
 
   return (
     <LinearGradient

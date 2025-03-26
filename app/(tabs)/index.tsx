@@ -41,9 +41,9 @@ export default function HomeScreen() {
       const res = await CoinAPI.first_coin();
       const typedRes = res as CoinAPIResponse;
       if (typedRes?.data?.Data?.length) {
-        setFirstCoin({ ...typedRes?.data?.Data[0] }); // Cloning the object
+        setFirstCoin({...typedRes?.data?.Data[0]}); // Cloning the object
       }
-      console.log(firstCoin)
+      console.log(firstCoin);
     } catch (error) {
       console.error("Error fetching first coin:", error);
     }
@@ -55,7 +55,7 @@ export default function HomeScreen() {
       const res = await CoinAPI.fetchTop5Coins();
       const typedRes = res as CoinAPIResponse;
       if (typedRes?.data?.Data) {
-        setTop5Coins([...typedRes.data.Data.slice(1)]); // Cloning the array
+        setTop5Coins([...typedRes?.data?.Data.slice(1)]); // Cloning the array
       }
     } catch (error) {
       console.error("Error fetching top coins:", error);

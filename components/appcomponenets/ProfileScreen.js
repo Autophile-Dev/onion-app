@@ -11,6 +11,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
+import { Switch } from "react-native";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -99,9 +100,205 @@ const ProfileScreen = () => {
             <View style={styles.innerSubscriptionCardTextContainer}>
               <Text style={styles.areaTextTitle}>SUBSCRIPTION</Text>
               <View style={styles.areaTextContainer}>
-                <View style={styles.areaRow}></View>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowTitle}>
+                    <Text style={styles.rowTitle}>My Plan</Text>
+                  </View>
+                  <View style={styles.rowIdentification}>
+                    <Image
+                      style={styles.rowIdentificationImage}
+                      source={require("../../assets/images/iconsapp/crown.png")}
+                    />
+                    <Text style={styles.identificationText}>VIP MEMBER</Text>
+                  </View>
+                </View>
+                <View style={styles.areaRow}>
+                  {/* <Text style={styles.rowTitle}>My Plan</Text> */}
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowyellow}
+                      source={require("../../assets/images/iconsapp/subscription.png")}
+                    />
+                    <Text style={styles.identificationTextYellow}>
+                      View Plans
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.areaRow}>
+                  {/* <Text style={styles.rowTitle}>My Plan</Text> */}
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowWhite}
+                      source={require("../../assets/images/iconsapp/redeemcode.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>
+                      Redeem Code
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.areaRowLast}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowWhite}
+                      source={require("../../assets/images/iconsapp/subhistory.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>
+                      Subscription History
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
+          </View>
+        </View>
+
+        {/* Notifications */}
+        <View style={styles.subscriptionCardContainer}>
+          <View style={styles.innerSubscriptionCardContainer}>
+            <View style={styles.innerSubscriptionCardTextContainer}>
+              <Text style={styles.areaTextTitle}>NOTIFICATION</Text>
+              <View style={styles.areaTextContainer}>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowTitle}>
+                    <Text style={styles.rowTitle}>Signals</Text>
+                  </View>
+                  <View style={styles.rowIdentification}>
+                    <Switch
+                      style={{ height: 20, width: 40 }}
+                      trackColor={{ false: "#0F4444", true: "#3CBEBE" }}
+                      thumbColor={isSignal ? "#ffff" : "#ffff"}
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={SignalSwitch}
+                      value={isSignal}
+                    />
+                  </View>
+                </View>
+                <View style={styles.areaRow}>
+                  {/* <Text style={styles.rowTitle}>My Plan</Text> */}
+                  <View style={styles.rowTitle}>
+                    <Text style={styles.rowTitle}>News</Text>
+                  </View>
+                  <View style={styles.rowIdentification}>
+                    <Switch
+                      style={{ height: 20, width: 40 }}
+                      trackColor={{ false: "#0F4444", true: "#3CBEBE" }}
+                      thumbColor={isNews ? "#ffff" : "#ffff"}
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={NewsSwitch}
+                      value={isNews}
+                    />
+                  </View>
+                </View>
+
+                <View style={styles.areaRowLast}>
+                  <View style={styles.rowTitle}>
+                    <Text style={styles.rowTitle}>Other Alerts</Text>
+                  </View>
+                  <View style={styles.rowIdentification}>
+                    <Switch
+                      style={{ height: 20, width: 40 }}
+                      trackColor={{ false: "#0F4444", true: "#3CBEBE" }}
+                      thumbColor={isOther ? "#ffff" : "#ffff"}
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={OtherSwitch}
+                      value={isOther}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Community */}
+        <View style={styles.subscriptionCardContainer}>
+          <View style={styles.innerSubscriptionCardContainer}>
+            <View style={styles.innerSubscriptionCardTextContainer}>
+              <Text style={styles.areaTextTitle}>JOIN OUR COMMUNITY</Text>
+              <View style={styles.areaTextContainer}>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/logos_telegram.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>Telegram</Text>
+                  </View>
+                </View>
+
+                <View style={styles.areaRowLast}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/discord.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>Discord</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Follow Us */}
+        <View style={styles.subscriptionCardContainer}>
+          <View style={styles.innerSubscriptionCardContainer}>
+            <View style={styles.innerSubscriptionCardTextContainer}>
+              <Text style={styles.areaTextTitle}>FOLLOW US</Text>
+              <View style={styles.areaTextContainer}>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/fb.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>Facebook</Text>
+                  </View>
+                </View>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/ig.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>
+                      Instagram
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.areaRow}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/twitter.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>Twitter</Text>
+                  </View>
+                </View>
+                <View style={styles.areaRowLast}>
+                  <View style={styles.rowIdentificationNewRow}>
+                    <Image
+                      style={styles.rowIdentificationImageNewRowSocialIcon}
+                      source={require("../../assets/images/iconsapp/share.png")}
+                    />
+                    <Text style={styles.identificationTextWhite}>
+                      Share this app
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footerContainer}>
+          <View style={styles.internalFooterContainer}>
+            <Image
+              style={styles.footerIcon}
+              source={require("../../assets/images/iconsapp/footeronion.png")}
+            />
+            <Text style={styles.footerText}>© 2023 All Rights Reserved | Onion Technologies</Text>
           </View>
         </View>
       </ScrollView>
@@ -128,6 +325,29 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     // backgroundColor: "#E07A7AFF",
+  },
+  internalFooterContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    alignItems: "center",
+    gap:10,
+  },
+  footerContainer: {
+    width: "100%",
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+  },
+  footerIcon:{
+    width: 25,
+    height: 25,
+    resizeMode: "contain",
+  },
+  footerText:{
+    fontSize: 12,
+    // marginHorizontal: 20,
+    // fontWeight: "bold",
+    color: "#ffffff",
   },
   innerProfileCardContainer: {
     backgroundColor: "#ffffff",
@@ -186,7 +406,7 @@ const styles = StyleSheet.create({
   },
   subscriptionCardContainer: {
     width: "100%",
-    paddingBottom: 20,
+    paddingBottom: 10,
     paddingHorizontal: 20,
     // backgroundColor: "#E07A7AFF",
   },
@@ -210,11 +430,85 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#1E5A5A",
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+
     borderRadius: 15,
   },
-  areaRow:{
-    
-  }
+  areaRow: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#277676",
+  },
+  areaRowLast: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  rowTitle: {
+    color: "#ffffff",
+    width: "50%",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  rowIdentification: {
+    width: "50%",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    gap: 4,
+    justifyContent: "flex-end",
+  },
+  rowIdentificationImage: {
+    width: 12,
+    height: 10,
+    resizeMode: "contain",
+  },
+  identificationText: {
+    color: "#F4B41A",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  rowIdentificationNewRow: {
+    width: "100%",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+    // justifyContent:'flex-end'
+  },
+  rowIdentificationImageNewRowyellow: {
+    width: 12,
+    height: 12,
+    resizeMode: "contain",
+    tintColor: "#FF9900",
+  },
+  identificationTextYellow: {
+    color: "#FF9900",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  identificationTextWhite: {
+    color: "#FFFFFFFF",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  rowIdentificationImageNewRowWhite: {
+    width: 12,
+    height: 12,
+    resizeMode: "contain",
+  },
+  rowIdentificationImageNewRowSocialIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+  },
 });
