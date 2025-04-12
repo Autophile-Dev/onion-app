@@ -51,6 +51,7 @@ const TopGainers = ({refreshing}) => {
       console.log("Top Gainer Reload")
     }
   }, [refreshing]);
+  
   return (
     <View>
       {CoinLoading ? (

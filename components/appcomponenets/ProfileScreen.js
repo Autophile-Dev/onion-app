@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
 import { Switch } from "react-native";
+import { Link } from "expo-router";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -100,7 +101,7 @@ const ProfileScreen = () => {
             <View style={styles.innerSubscriptionCardTextContainer}>
               <Text style={styles.areaTextTitle}>SUBSCRIPTION</Text>
               <View style={styles.areaTextContainer}>
-                <View style={styles.areaRow}>
+                <TouchableOpacity onPress={()=>navigation.navigate("myplan")} style={styles.areaRow}>
                   <View style={styles.rowTitle}>
                     <Text style={styles.rowTitle}>My Plan</Text>
                   </View>
@@ -111,19 +112,21 @@ const ProfileScreen = () => {
                     />
                     <Text style={styles.identificationText}>VIP MEMBER</Text>
                   </View>
-                </View>
-                <View style={styles.areaRow}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate("subscription")} style={styles.areaRow}>
                   {/* <Text style={styles.rowTitle}>My Plan</Text> */}
-                  <View style={styles.rowIdentificationNewRow}>
-                    <Image
-                      style={styles.rowIdentificationImageNewRowyellow}
-                      source={require("../../assets/images/iconsapp/subscription.png")}
-                    />
-                    <Text style={styles.identificationTextYellow}>
-                      View Plans
-                    </Text>
-                  </View>
-                </View>
+                 
+                    <View style={styles.rowIdentificationNewRow}>
+                      <Image
+                        style={styles.rowIdentificationImageNewRowyellow}
+                        source={require("../../assets/images/iconsapp/subscription.png")}
+                      />
+                      <Text style={styles.identificationTextYellow}>
+                        View Plans
+                      </Text>
+                    </View>
+                 
+                </TouchableOpacity>
                 <View style={styles.areaRow}>
                   {/* <Text style={styles.rowTitle}>My Plan</Text> */}
                   <View style={styles.rowIdentificationNewRow}>
@@ -298,7 +301,9 @@ const ProfileScreen = () => {
               style={styles.footerIcon}
               source={require("../../assets/images/iconsapp/footeronion.png")}
             />
-            <Text style={styles.footerText}>© 2023 All Rights Reserved | Onion Technologies</Text>
+            <Text style={styles.footerText}>
+              © 2023 All Rights Reserved | Onion Technologies
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -331,19 +336,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     alignItems: "center",
-    gap:10,
+    gap: 10,
   },
   footerContainer: {
     width: "100%",
     paddingVertical: 40,
     paddingHorizontal: 20,
   },
-  footerIcon:{
+  footerIcon: {
     width: 25,
     height: 25,
     resizeMode: "contain",
   },
-  footerText:{
+  footerText: {
     fontSize: 12,
     // marginHorizontal: 20,
     // fontWeight: "bold",
@@ -475,6 +480,7 @@ const styles = StyleSheet.create({
   identificationText: {
     color: "#F4B41A",
     fontSize: 12,
+    textAlign: "right",
     fontWeight: "600",
   },
   rowIdentificationNewRow: {

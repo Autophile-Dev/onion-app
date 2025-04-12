@@ -33,6 +33,7 @@ export default function RootLayout() {
             <Stack.Screen name="notification"  />
             <Stack.Screen name="login"  />
             <Stack.Screen name="registration"  />
+            <Stack.Screen name="myplan"/>
           </Stack>
         
         

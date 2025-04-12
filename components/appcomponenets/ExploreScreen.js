@@ -17,6 +17,8 @@ import ExploreNewsCard from "./exploreNews";
 import NewsCard from "./newsCard";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
 import { RefreshControl } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Link } from "expo-router";
 export const SLIDER_WIDTH = Dimensions.get("window").width;
 export const ITEM_WIDTH = Dimensions.get("window").width;
 const ExploreScreen = () => {
@@ -36,7 +38,7 @@ const ExploreScreen = () => {
       setRefreshing(false);
     }, 2000);
   }, []);
-
+  const navigation = useNavigation();
   useEffect(() => {
     top3NewsFetch();
     news_fetch();
@@ -334,9 +336,9 @@ const ExploreScreen = () => {
                   style={styles.lockStyle}
                   source={require("../../assets/images/iconsapp/lock.png")}
                 />
-                <TouchableOpacity style={styles.upgradeButton}>
+                <Link style={styles.upgradeButton} href="/subscription">
                   <Text style={styles.buttonText}>Upgrade Plan</Text>
-                </TouchableOpacity>
+                </Link>
               </View>
             </View>
           </>
