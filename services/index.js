@@ -1,6 +1,6 @@
 const servers = {
   staging: "http://10.0.2.2:8000/",
-  production: "http://85.31.233.109:8000/",
+  production: "http://216.158.237.134:8000/",
 };
 
 const ROOT_URL = servers.production;
